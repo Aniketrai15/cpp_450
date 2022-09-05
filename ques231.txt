@@ -1,0 +1,24 @@
+int minimumDays(int S, int N, int M){
+        // code here
+        int sundays = S/7;
+        int buying_days = S-sundays;
+        
+        int food_needed = S*M;
+        int ans = 0;
+        if(food_needed%N==0){
+            ans = food_needed/N;
+        }
+        else{
+            ans = food_needed/N + 1;
+        }
+        
+        
+        if(ans<=buying_days){
+            return ans;
+        }
+        else{
+            return -1;
+        }
+        
+        
+    }

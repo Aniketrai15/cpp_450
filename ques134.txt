@@ -1,0 +1,53 @@
+private:
+      void insert_at_tail(struct Node* &anshead,struct Node* &anstail,int digit){
+         struct Node* temp = new Node(digit);
+         if(anshead==NULL){
+             anshead=temp;
+             anstail=temp;
+             return;
+         }
+         else{
+             anstail->next=temp;
+             anstail=temp;
+         }
+     }
+    
+    struct Node* reverse(struct Node* head){
+        struct Node* curr = head;
+        struct Node* prev= NULL;
+        struct Node* nxt=NULL;
+        
+        while(curr!=NULL){
+            nxt=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }
+        return prev;
+    }
+    
+    public:
+    Node* addOne(Node *head) 
+    {
+        // Your Code here
+        // return head of list after adding one
+        head=reverse(head);
+        int carry=1;
+        Node* anshead=NULL;
+        Node* anstail=NULL;
+        while(head!=NULL or carry!=0){
+            int val=0;
+            if(head!=NULL){
+                val=head->data;
+            }
+            int sum=val+carry;
+            int digit=sum%10;
+            insert_at_tail(anshead,anstail,digit);
+            carry=sum/10;
+            if(head!=NULL){
+                head=head->next;
+            }
+        }
+        return reverse(anshead);
+      
+    }

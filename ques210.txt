@@ -1,0 +1,41 @@
+int c;
+bool search(Node* root, int key){
+    if(root==NULL){
+        return false;
+    }
+    
+    if(key == root->data){
+        return true;
+    }
+    bool x= false;
+    bool y = false;
+    if(key<root->data){
+        x=search(root->left,key);
+    }
+    
+    else if (key > root->data){
+        y=search(root->right,key);
+    }
+    
+    return x or y;
+    
+    
+}
+
+void solve(Node* root1 , Node* root2, int x){
+    if(root1==NULL){
+        return;
+    }
+    solve(root1->left,root2,x);
+    if(search(root2 , x - root1->data)){
+        c++;
+    }
+    solve(root1->right,root2,x);
+}
+
+int countPairs(Node* root1, Node* root2, int x)
+    {
+        c=0;
+        solve(root1,root2,x);
+        return c;
+    }

@@ -1,0 +1,36 @@
+ Node* reverse(Node* head){
+        Node* prev=NULL;
+        Node* curr=head;
+        
+        while(curr!=NULL){
+            Node* temp=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=temp;
+        }
+        
+        return prev;
+    }
+    
+    Node *compute(Node *head)
+    {
+        // your code goes here
+        head=reverse(head);
+        Node* prev=head;
+        Node* curr=head->next;
+        int max=head->data;
+        while(curr!=NULL){
+            if(curr->data>=max ){
+                max=curr->data;
+                prev=curr;
+                curr=curr->next;
+            }
+            else{
+                prev->next=curr->next;
+                curr=prev->next;
+                
+            }
+        }
+        head=reverse(head);
+        return head;
+    }

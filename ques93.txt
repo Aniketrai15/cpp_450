@@ -1,0 +1,12 @@
+ int countSquares(int N) {
+        // code here
+        int int_sqrt = sqrt(N);
+        double deci_sqrt = sqrt(N);
+        
+        if(int_sqrt==deci_sqrt){
+            return int_sqrt-1;
+        }
+        else{
+            return int_sqrt;
+        }
+    }

@@ -1,0 +1,21 @@
+vector<int> ans;
+    int f=-1;
+    int l=-1;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==x and f==-1){
+            f=i;
+            l=i;
+        }
+        else if(arr[i]==x and f!=-1){
+            l=i;
+        }
+        else{
+            continue;
+        }
+    }
+    
+    ans.push_back(f);
+    ans.push_back(l);
+    
+    return ans;

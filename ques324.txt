@@ -1,0 +1,23 @@
+long long minCost(long long arr[], long long n) {
+        // Your code here
+        priority_queue<long long,vector<long long>,greater<long long>> heap;
+        long long i;
+        
+        for(i=0;i<n;i++){
+            heap.push(arr[i]);
+        }
+        long long cost=0;
+        while(heap.size()>1){
+            long long first=heap.top();
+            heap.pop();
+            
+            long long second = heap.top();
+            heap.pop();
+            
+            heap.push(first+second);
+            cost+=first+second;
+        }
+        
+        
+        return cost;
+    }

@@ -1,0 +1,20 @@
+string removeConsecutiveCharacter(string S)
+    {
+        // code here.
+        int n=S.size();
+        
+        if(n==0 or n==1){
+            return S;
+        }
+        
+        if(S[0]==S[1]){
+            int idx=0;
+            while(idx<n and S[idx]==S[0]){
+                idx++;
+            }
+            return S[0]+removeConsecutiveCharacter(S.substr(idx));
+        }
+        else{
+            return S[0]+removeConsecutiveCharacter(S.substr(1));
+        }
+    }

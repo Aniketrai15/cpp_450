@@ -1,0 +1,39 @@
+string longestPalin (string S) {
+        // code here
+        int strt=0;
+        int maxlen=1;
+        
+        for(int i=1;i<S.length();i++){
+            
+            // even
+            int l=i-1;
+            int r=i;
+            while(S[l]==S[r] and l>=0 and r<S.length()){
+                if(r-l+1>maxlen){
+                    maxlen=r-l+1;
+                    strt=l;
+                }
+                l--;
+                r++;
+            }
+            
+            //odd
+            l=i-1;
+            r=i+1;
+            while(S[l]==S[r] and l>=0 and r<S.length()){
+                if(r-l+1>maxlen){
+                    maxlen=r-l+1;
+                    strt=l;
+                }
+                l--;
+                r++;
+            }
+        }
+        
+        string ans="";
+        for(int i=strt;i<strt+maxlen;i++){
+            ans+=S[i];
+        }
+        
+        return ans;
+    }

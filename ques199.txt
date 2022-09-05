@@ -1,0 +1,9 @@
+int minValue(struct Node *root) {
+    // your code here
+    struct Node* temp =root;
+    while(temp->left!= NULL){
+        temp = temp->left;
+    }
+    
+    return temp->data;
+}

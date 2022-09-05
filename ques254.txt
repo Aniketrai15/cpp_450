@@ -1,0 +1,53 @@
+bool is_safe(int new_x,int new_y,vector<vector<bool>> &vis,vector<vector<int>> &arr,int n){
+        if((new_x >= 0 and new_x < n) and (new_y >= 0 and new_y < n) and vis[new_x][new_y]!=1 and arr[new_x][new_y]==1){
+            return true;
+        }
+        
+        else{
+            return false;
+        }
+    }
+    
+    void solve(int x,int y,vector<vector<int>> &arr,vector<string> &ans,string path,vector<vector<bool>> &vis,int n){
+        // base case 
+        if(x==n-1 and y==n-1){
+            ans.push_back(path);
+            return;
+        }
+        
+        vis[x][y]=true;
+        //movements 
+        
+        //down
+        if(is_safe(x+1,y,vis,arr,n)){
+            solve(x+1,y,arr,ans,path+'D',vis,n);
+        }
+        //left
+        if(is_safe(x,y-1,vis,arr,n)){
+            solve(x,y-1,arr,ans,path+'L',vis,n);
+        }
+        //right
+        if(is_safe(x,y+1,vis,arr,n)){
+            solve(x,y+1,arr,ans,path+'R',vis,n);
+        }
+        //up
+        if(is_safe(x-1,y,vis,arr,n)){
+            solve(x-1,y,arr,ans,path+'U',vis,n);
+        }
+        
+        vis[x][y]=false;
+    }
+    
+    
+    public:
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        vector<string> ans;
+        if(m[0][0]==0){
+            return ans;
+        }
+        vector<vector<bool>> vis(n,vector<bool>(n,0));
+        string path="";
+        solve(0,0,m,ans,path,vis,n);
+        return ans;
+    }

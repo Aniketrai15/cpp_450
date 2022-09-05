@@ -1,0 +1,32 @@
+private:
+    void solve(Node* root,int len,int &max_len,int sum,int &max_sum){
+        // base case;
+        if(root==NULL){
+            if(len>max_len){
+                max_len = len;
+                max_sum=sum;
+            }
+            else if(len==max_len){
+                max_sum=max(sum,max_sum);
+            }
+            
+            return;
+        }
+        
+        sum=sum + root->data;
+        solve(root->left,len+1,max_len,sum,max_sum);
+        solve(root->right,len+1,max_len,sum,max_sum);
+    }
+public:
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        //code here
+        int len=0;
+        int max_len=INT_MIN;
+        int sum=0;
+        int max_sum=INT_MIN;
+        
+        solve(root,len,max_len,sum,max_sum);
+        return max_sum;
+    }

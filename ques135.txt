@@ -1,0 +1,70 @@
+private:
+     void insert_at_tail(struct Node* &anshead,struct Node* &anstail,int digit){
+         struct Node* temp = new Node(digit);
+         if(anshead==NULL){
+             anshead=temp;
+             anstail=temp;
+             return;
+         }
+         else{
+             anstail->next=temp;
+             anstail=temp;
+         }
+     }
+    
+     struct Node* add(struct Node* first,struct Node* second){
+        int carry=0;
+        struct Node* anshead=NULL;
+        struct Node* anstail=NULL;
+        while(first!=NULL or second!=NULL or carry!=0){
+            int val1=0;
+            if(first!=NULL){
+                val1=first->data;
+            }
+            int val2=0;
+            if(second!=NULL){
+                val2=second->data;
+            }
+            
+            int val=val1+val2+carry;
+            int digit=val%10;
+            insert_at_tail(anshead,anstail,digit);
+            carry=val/10;
+            if(first!=NULL){
+                first=first->next;
+            }
+            if(second!=NULL){
+                second=second->next;
+            }
+        }
+        
+        return anshead;
+    }
+    
+    struct Node* reverse(struct Node* head){
+        struct Node* curr = head;
+        struct Node* prev= NULL;
+        struct Node* nxt=NULL;
+        
+        while(curr!=NULL){
+            nxt=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }
+        return prev;
+    }
+    
+   
+    public:
+    //Function to add two numbers represented by linked list.
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // code here
+        first=reverse(first);
+        second=reverse(second);
+        
+        struct Node* ans = add(first,second);
+        ans=reverse(ans);
+        return ans;
+    }

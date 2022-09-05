@@ -1,0 +1,47 @@
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector<int> topView(Node *root)
+    {
+        //Your code here
+        vector<int> ans;
+        
+        if(root==NULL) return ans;
+        
+        map<int,int> m;
+        queue<pair<Node*,int>> q;
+        
+        q.push({root,0});
+        
+        while(!q.empty()){
+            auto v = q.front();
+            q.pop();
+            Node* temp=v.first;
+            int hd=v.second;
+            
+            if(m.find(hd)==m.end()){    //if node at hd does't exsist or  not visited
+                m[hd]=temp->data;
+            }
+            
+            if(temp->left){
+                q.push({temp->left,hd-1});
+            }
+            
+            if(temp->right){
+                q.push({temp->right,hd+1});
+            }
+        }
+        
+        for(auto it:m){
+            ans.push_back(it.second);
+        }
+        
+        return ans;
+        
+        
+    }
+
+};
+

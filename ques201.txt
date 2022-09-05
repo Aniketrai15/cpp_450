@@ -1,0 +1,24 @@
+void help(Node* root, Node* &prev, int &f){
+        if(root==NULL){
+            return;
+        }
+        
+        help(root->left, prev, f);
+        if(prev!=NULL and root->data <= prev->data){
+            f=0;
+            return;
+        }
+        prev=root;
+        
+        help(root->right, prev, f);
+    }
+    
+    bool isBST(Node* root) 
+    {
+        // Your code here
+        Node* prev=NULL;
+        int f=1;
+        help(root,prev,f);
+        
+        return f;
+    }

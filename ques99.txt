@@ -1,0 +1,14 @@
+bool findPair(int arr[], int size, int n){
+    //code
+    sort(arr,arr+size);
+    
+    for(int i=0;i<size;i++){
+        int idx = upper_bound(arr+i+1,arr+size,arr[i]+n) -arr -1;
+        if(arr[idx] - arr[i] == n){
+            return true;
+            break;
+        }
+    }
+    
+    return false;
+}
