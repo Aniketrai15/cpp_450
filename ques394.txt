@@ -1,0 +1,30 @@
+int solve(int n,int arr[],vector<vector<int>> &dp,int curr,int prev){
+        if(curr==n){
+            return 0;
+        }
+        if(dp[curr][prev+1]!=-1){
+            return dp[curr][prev+1];
+        }
+        
+        int incl=0;
+        if(arr[curr]>arr[prev] or prev==-1){
+            incl = 1+solve(n,arr,dp,curr+1,curr);
+        }
+        
+        int excl = solve(n,arr,dp,curr+1,prev);
+        
+        
+        return dp[curr][prev+1]= max(incl,excl);
+        
+    }
+    public:
+    //Function to find length of longest increasing subsequence.
+    int longestSubsequence(int n, int a[])
+    {
+       // your code here
+       vector<vector<int>> dp(n,vector<int>(n+1,-1));
+       
+       int ans = solve(n,a,dp,0,-1);
+       
+       return ans;
+    }
